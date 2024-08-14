@@ -17,9 +17,9 @@ class CongViecController extends Controller
      */
     public function index(Request $request): View
     {
-        $congViec = CongViec::latest()->paginate(5);
+        $congViec = CongViec::latest()->paginate(10);
         $value = ($request->input('page', 1) - 1) * 5;
-        return view('admin.directory.congviec.index', compact('congViec'))
+        return view('admin.directory.cong-viec.index-work', compact('congViec'))
             ->with('i', $value);
     }
 
@@ -28,7 +28,7 @@ class CongViecController extends Controller
      */
     public function create(): View
     {
-        return view('admin.directory.congviec.create');
+        return view('admin.directory.cong-viec.create-work');
     }
 
     /**
@@ -37,8 +37,7 @@ class CongViecController extends Controller
     public function store(CongViecStoreRequest $congViecRequest): RedirectResponse
     {
         CongViec::create($congViecRequest->validated());
-        return redirect()->route('admin.directory.congviec.index')
-                        ->with('success', 'CongViec created successfully.');
+        return redirect()->back()->with('success', 'CongViec created successfully.');
     }
 
     /**
@@ -46,7 +45,7 @@ class CongViecController extends Controller
      */
     public function show(CongViec $congViec): View
     {
-        return view('admin.directory.congviec.show', compact('congViec'));
+        return view('admin.directory.cong-viec.show-work', compact('congViec'));
     }
 
     /**
@@ -54,7 +53,7 @@ class CongViecController extends Controller
      */
     public function edit(CongViec $congViec): View
     {
-        return view('admin.directory.congviec.edit', compact('congViec'));
+        return view('admin.directory.cong-viec.edit-work', compact('congViec'));
     }
 
     /**
@@ -63,8 +62,7 @@ class CongViecController extends Controller
     public function update(CongViecUpdateRequest $congViecRequest, CongViec $congViec): RedirectResponse
     {
         $congViec->update($congViecRequest->validated());
-        return redirect()->route('admin.directory.congviec.index')
-                        ->with('success', 'CongViec updated successfully.');
+        return redirect()->back()->with('success', 'CongViec updated successfully.');
     }
 
     /**
@@ -73,7 +71,6 @@ class CongViecController extends Controller
     public function destroy(CongViec $congViec): RedirectResponse
     {
         $congViec->delete();
-        return redirect()->route('admin.directory.congviec.index')
-                        ->with('success', 'CongViec deleted successfully.');
+        return redirect()->back()->with('success', 'CongViec deleted successfully.');
     }
 }

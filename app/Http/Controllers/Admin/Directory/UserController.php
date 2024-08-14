@@ -17,9 +17,9 @@ class UserController extends Controller
      */
     public function index(Request $request): View
     {
-        $user = User::latest()->paginate(5);
+        $user = User::latest()->paginate(10);
         $value = ($request->input('page', 1) - 1) * 5;
-        return view('admin.directory.user.index', compact('user'))
+        return view('admin.directory.user.index-user', compact('user'))
             ->with('i', $value);
     }
 
@@ -28,7 +28,7 @@ class UserController extends Controller
      */
     public function create(): View
     {
-        return view('admin.directory.user.create');
+        return view('admin.directory.user.create-user');
     }
 
     /**
@@ -37,8 +37,7 @@ class UserController extends Controller
     public function store(UserStoreRequest $userRequest): RedirectResponse
     {
         User::create($userRequest->validated());
-        return redirect()->route('admin.directory.user.index')
-                        ->with('success', 'User created successfully');
+        return redirect()->back()->with('success', 'User created successfully');
     }
 
     /**
@@ -46,7 +45,7 @@ class UserController extends Controller
      */
     public function show(User $user): View
     {
-        return view('admin.directory.user.show', compact('user'));
+        return view('admin.directory.user.show-user', compact('user'));
     }
 
     /**
@@ -54,7 +53,7 @@ class UserController extends Controller
      */
     public function edit(User $user): View
     {
-        return view('admin.directory.user.show', compact('user'));
+        return view('admin.directory.user.edit-user', compact('user'));
     }
 
     /**
@@ -63,8 +62,7 @@ class UserController extends Controller
     public function update(UserUpdateRequest $userRequest, User $user): RedirectResponse
     {
         $user->update($userRequest->validated());
-        return redirect()->route('admin.directory.user.index')
-                        ->with('success', 'User updated successfully.');
+        return redirect()->back()->with('success', 'User updated successfully.');
     }
 
     /**
@@ -73,7 +71,6 @@ class UserController extends Controller
     public function destroy(User $user): RedirectResponse
     {
         $user->delete();
-        return redirect()->route('admin.directory.user.index')
-                        ->with('success', 'User deleted successfully.');
+        return redirect()->back()->with('success', 'User deleted successfully.');
     }
 }

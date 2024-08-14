@@ -20,4 +20,9 @@ class TuKhoa extends Model
     {
         return $this->belongsToMany(CongViec::class);
     }
+
+    public function toChucs()
+    {
+        return $this->belongsToMany(ToChuc::class);
+    }
 }

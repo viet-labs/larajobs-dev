@@ -1,4 +1,4 @@
-@extends('layouts.layouts')
+@extends('layouts.admin')
 
 @section('title', 'Admin')
 
@@ -15,7 +15,7 @@
             </div>
 
             @session('success')
-                <div class="alert alert-success" role="alert"> {{ $value }} </div>
+                <div class="my-4 mx-2 px-4 py-2 rounded-lg border border-green-600 bg-green-300 font-bold"> {{ $value }} </div>
             @endsession
 
             <div class="mx-2 mb-[10rem]">
@@ -60,7 +60,9 @@
                     </tbody>
                 </table>
 
-                {!! $tuKhoa->links() !!}
+                <div class="mt-4">
+                    {{ $tuKhoa->links() }}
+                </div>
 
             </div>
         </div>

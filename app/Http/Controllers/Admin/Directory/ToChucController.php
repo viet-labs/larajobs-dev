@@ -17,9 +17,9 @@ class ToChucController extends Controller
      */
     public function index(Request $request): View
     {
-        $toChuc = ToChuc::latest()->paginate(5);
+        $toChuc = ToChuc::latest()->paginate(10);
         $value = ($request->input('page', 1) - 1) * 5;
-        return view('admin.directory.tochuc.index', compact('toChuc'))
+        return view('admin.directory.to-chuc.index-company', compact('toChuc'))
             ->with('i', $value);
     }
 
@@ -28,7 +28,7 @@ class ToChucController extends Controller
      */
     public function create(): View
     {
-        return view('admin.directory.tochuc.create');
+        return view('admin.directory.to-chuc.create-company');
     }
 
     /**
@@ -37,8 +37,7 @@ class ToChucController extends Controller
     public function store(ToChucStoreRequest $toChucRequest): RedirectResponse
     {
         ToChuc::create($toChucRequest->validated());
-        return redirect()->route('admin.directory.tochuc.index')
-                        ->with('success', 'ToChuc created successfully');
+        return redirect()->back()->with('success', 'ToChuc created successfully');
     }
 
     /**
@@ -46,7 +45,7 @@ class ToChucController extends Controller
      */
     public function show(ToChuc $toChuc): View
     {
-        return view('admin.directory.tochuc.show', compact('toChuc'));
+        return view('admin.directory.to-chuc.show-company', compact('toChuc'));
     }
 
     /**
@@ -54,7 +53,7 @@ class ToChucController extends Controller
      */
     public function edit(ToChuc $toChuc): View
     {
-        return view('admin.directory.tochuc.show', compact('toChuc'));
+        return view('admin.directory.to-chuc.edit-company', compact('toChuc'));
     }
 
     /**
@@ -63,8 +62,7 @@ class ToChucController extends Controller
     public function update(ToChucUpdateRequest $toChucRequest, ToChuc $toChuc): RedirectResponse
     {
         $toChuc->update($toChucRequest->validated());
-        return redirect()->route('admin.directory.tochuc.index')
-                        ->with('success', 'ToChuc updated successfully.');
+        return redirect()->back()->with('success', 'ToChuc updated successfully.');
     }
 
     /**
@@ -73,7 +71,6 @@ class ToChucController extends Controller
     public function destroy(ToChuc $toChuc): RedirectResponse
     {
         $toChuc->delete();
-        return redirect()->route('admin.directory.tochuc.index')
-                        ->with('success', 'ToChuc deleted successfully.');
+        return redirect()->back()->with('success', 'ToChuc deleted successfully.');
     }
 }

@@ -17,9 +17,9 @@ class TuKhoaController extends Controller
      */
     public function index(Request $request): View
     {
-        $tuKhoa = TuKhoa::latest()->paginate(5);
+        $tuKhoa = TuKhoa::latest()->paginate(10);
         $value = ($request->input('page', 1) - 1) * 5;
-        return view('admin.directory.tukhoa.index', compact('tuKhoa'))
+        return view('admin.directory.tu-khoa.index-tag', compact('tuKhoa'))
             ->with('i', $value);
     }
 
@@ -28,7 +28,7 @@ class TuKhoaController extends Controller
      */
     public function create(): View
     {
-        return view('admin.directory.tukhoa.create');
+        return view('admin.directory.tu-khoa.create-tag');
     }
 
     /**
@@ -37,8 +37,7 @@ class TuKhoaController extends Controller
     public function store(TuKhoaStoreRequest $tuKhoaRequest): RedirectResponse
     {
         TuKhoa::create($tuKhoaRequest->validated());
-        return redirect()->route('admin.directory.tukhoa.index')
-                        ->with('success', 'TuKhoa created successfully');
+        return redirect()->back()->with('success', 'TuKhoa created successfully');
     }
 
     /**
@@ -46,7 +45,7 @@ class TuKhoaController extends Controller
      */
     public function show(TuKhoa $tuKhoa): View
     {
-        return view('admin.directory.tukhoa.show', compact('tuKhoa'));
+        return view('admin.directory.tu-khoa.show-tag', compact('tuKhoa'));
     }
 
     /**
@@ -54,7 +53,7 @@ class TuKhoaController extends Controller
      */
     public function edit(TuKhoa $tuKhoa): View
     {
-        return view('admin.directory.tukhoa.show', compact('tuKhoa'));
+        return view('admin.directory.tu-khoa.edit-tag', compact('tuKhoa'));
     }
 
     /**
@@ -63,8 +62,7 @@ class TuKhoaController extends Controller
     public function update(TuKhoaUpdateRequest $tuKhoaRequest, TuKhoa $tuKhoa): RedirectResponse
     {
         $tuKhoa->update($tuKhoaRequest->validated());
-        return redirect()->route('admin.directory.tukhoa.index')
-                        ->with('success', 'TuKhoa updated successfully.');
+        return redirect()->back()->with('success', 'TuKhoa updated successfully.');
     }
 
     /**
@@ -73,7 +71,6 @@ class TuKhoaController extends Controller
     public function destroy(TuKhoa $tuKhoa): RedirectResponse
     {
         $tuKhoa->delete();
-        return redirect()->route('admin.directory.tukhoa.index')
-                        ->with('success', 'TuKhoa deleted successfully.');
+        return redirect()->back()->with('success', 'TuKhoa deleted successfully.');
     }
 }

@@ -27,4 +27,9 @@ class ToChuc extends Model
     {
         return $this->hasMany(CongViec::class);
     }
+
+    public function tuKhoas()
+    {
+        return $this->belongsToMany(TuKhoa::class);
+    }
 }

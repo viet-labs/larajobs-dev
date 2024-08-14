@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\ToChuc;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\TuKhoa;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ToChucTableSeeder extends Seeder
 {
@@ -13,7 +15,10 @@ class ToChucTableSeeder extends Seeder
      */
     public function run(): void
     {
-        ToChuc::factory(10)->create();
+        ToChuc::factory(10)
+            ->for(User::factory())
+            ->hasTuKhoas(TuKhoa::factory()->count(4))
+            ->create();
 
     }
 }

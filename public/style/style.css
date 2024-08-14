@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'Scandia';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/fonts/scandia-web-thin.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Scandia Bold';
+    font-style: bold;
+    font-weight: 700;
+    font-display: swap;
+    src: url(/fonts/scandia-web-regular.woff2) format('woff2');
+}
