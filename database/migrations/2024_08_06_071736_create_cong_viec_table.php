@@ -22,7 +22,6 @@ return new class extends Migration
             $table->integer('muc_luong_toi_da')->default(0);
             $table->integer('luot_xem')->default(0);
             $table->timestamp('ngay_het_han')->nullable();
-            $table->boolean('is_admin')->default(false);
             $table->integer('user_id');
             $table->integer('to_chuc_id');
             $table->timestamps();
